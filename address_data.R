@@ -25,14 +25,23 @@ getAddressData <- function(parsed.address) {
   return(parsed.data)
 }
 
-address.ret <- parseAddress("2114 Bigelow Ave Seattle, WA 98109")
-data <- getAddressData(address.ret)
+getHousePrice <- function(full.address) {
+  data <- getAddressData(parseAddress(full.address))$response$results[[1]]
+  price <- list()
+  price$amount <- data$zestimate$amount$text
+  price$currency <- data$zestimate$amount$.attrs[['currency']]
+  return(price)
+}
+
+seattle.address <- "4742 19th Ave NE, Seattle, WA 98105"
+ballard.address <- "2226 NW 62nd St APT 3, Seattle, WA 98107"
+getHousePrice(seattle.address)
+getHousePrice(ballard.address)
 
 
 # Zillow site: https://www.zillow.com/howto/api/neighborhood-boundaries.htm
 # ggmap needs recognition
 
-# zestimate: https://www.zillow.com/howto/api/GetZestimate.htm
 # https://www.zillow.com/webservice/GetSearchResults.htm
 
 # http://www.zillow.com/webservice/GetSearchResults.htm
