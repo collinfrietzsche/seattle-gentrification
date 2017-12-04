@@ -16,14 +16,14 @@ bike.neighborhood <- group_by(bike.racks, Neighborhood)%>%
 #gives you the number of food banks in each neighborhood
 food.bank.neighborhood <- group_by(food.banks, Neighborhood)%>%
   summarise(
-    "# of Food Banks" = n()
+    "Number of Food Banks" = n()
   )
 
 #provides the number of city features in the dataset 
 #FIX THIS
 sum.city.feature <- group_by(neighborhood.details, City.Feature)%>%
   summarise(
-    "# of City Feature" = n()
+    "Number of City Feature" = n()
   )
   
 #we need to make a giant dataframe of all the summary 
@@ -38,5 +38,11 @@ all.summary.data <- join_all(list(bike.neighborhood,
                tennis.courts.by.neighborhood),
                by= 'Neighborhood', type = 'left')
 
+neighborhood.map <- ggplot(WA.df) +
+  aes(long,lat,group=group) +
+  geom_polygon() +
+  geom_path(color="white") +
+  coord_equal() +
+  scale_fill_brewer("Seattle Neighborhoods")
 
-
+#now we need to add hover over feature to the map using the all.summary.data frame from above!
