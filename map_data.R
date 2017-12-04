@@ -2,7 +2,7 @@
 library("rgdal") # librarys sp, will use proj.4 if installed
 library("maptools")
 library("ggplot2")
-library("plyr")
+library("dplyr")
 library("rgeos")
 library("ggmap")
 
@@ -26,6 +26,7 @@ ggplot(WA.df) +
   geom_path(color="white") +
   coord_equal() +
   scale_fill_brewer("Seattle Neighborhoods")
+  
 
 # Test location
 # result <- geocode("6724 24th Ave NW Seattle, WA 98117", output = "latlona", source = "google")
