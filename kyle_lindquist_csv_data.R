@@ -8,17 +8,17 @@ public.spaces <- read.csv('./data_modified/Public_Spaces-modified.csv', stringsA
 # provides num of garages/parking lots by neighborhood
 garages.parking.by.neighborhood <- group_by(garages.and.parking.lots, Neighborhood) %>%
   summarise(
-    num.garages.parking = n()
+    "Number of Garages and Parking Lots" = n()
   )
 
 # provides num of tennis courts by neighborhood
 tennis.courts.by.neighborhood <- group_by(tennis.courts, Neighborhood) %>%
   summarise(
-    num.tennis.courts = n()
+    "Number of Tennis Courts" = n()
   )
 
 # provides num of public spaces by neighborhood
 public.spaces.by.neighborhood <- group_by(public.spaces, Neighborhood) %>%
   summarise(
-    num.public.spaces = n()
+    "Number of Public Spaces" = n()
   )
