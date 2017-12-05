@@ -26,7 +26,6 @@ ggplot(WA.df) +
   geom_path(color="white") +
   coord_equal() +
   scale_fill_brewer("Seattle Neighborhoods")
-  
 
 # Test location
 # result <- geocode("6724 24th Ave NW Seattle, WA 98117", output = "latlona", source = "google")
