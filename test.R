@@ -4,6 +4,7 @@ library("rgdal") # librarys sp, will use proj.4 if installed
 library("maptools")
 library("ggplot2")
 library("plyr")
+library("dplyr")
 library("rgeos")
 library("ggmap")
 
