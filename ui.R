@@ -14,7 +14,7 @@ names <- df$RegionName
 shinyUI(navbarPage('Seattle Median House Prices',
                    # Create a tab panel for your map
                    tabPanel('Scatter',
-                            titlePanel("Years vs Price"),
+                            titlePanel("Price vs Time"),
                             # Create sidebar layout
                             sidebarLayout(
                               # Side Bars
@@ -22,12 +22,29 @@ shinyUI(navbarPage('Seattle Median House Prices',
                                 selectInput('neighborhood', label = 'Select Neighborhood:', 
                                             choices = names),
                                 sliderInput("time", "Time range:", min = 2010.01, max = 2017.09,
-                                            value = c(2010.05, 2016.1))
+                                            value = c(2010.05, 2016.1), step = 0.01)  ##### change the step = ?
                               ),  
                               # Main panel display plotly map
                               mainPanel(
                                 plotlyOutput('scatter')
                               )
                             )
-                          )
+                          ),
+                   tabPanel('Map',
+                            titlePanel("Maps"),
+                            # Create sidebar layout
+                            sidebarLayout(
+                              # Side Bars
+                              sidebarPanel(
+                                selectInput('neighborhood', label = 'Select Neighborhood:', 
+                                            choices = names),
+                                sliderInput("time", "Time range:", min = 2010.01, max = 2017.09,
+                                            value = c(2010.05, 2016.1), step = 0.01)  ##### change the step = ?
+                              ),  
+                              # Main panel display plotly map
+                              mainPanel(
+                                plotlyOutput('map')
+                              )
+                            )
+                   )
 ))
