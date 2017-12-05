@@ -29,5 +29,5 @@ shinyUI(navbarPage('Seattle Median House Prices',
                                 plotlyOutput('scatter')
                               )
                             )
-                   )
+                          )
 ))
