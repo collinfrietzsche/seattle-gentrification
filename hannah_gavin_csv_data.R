@@ -24,7 +24,7 @@ neighborhood.details <- read.csv('./data_modified/Neighborhood_Details-modified.
 #do we want to override the existing data frame or create a new one?
 bike.neighborhood <- group_by(bike.racks, Neighborhood) %>%
   summarise(
-    "# of Bike Racks" = n()
+    "Number of Bike Racks" = n()
   )
 
 #gives you the number of food banks in each neighborhood
@@ -34,7 +34,7 @@ food.bank.neighborhood <- group_by(food.banks, Neighborhood)%>%
   )
 
 #provides the number of city features in the dataset 
-#FIX THIS
+#FIX THIS we need the data frame to include neighborhood 
 sum.city.feature <- group_by(neighborhood.details, City.Feature)%>%
   summarise(
     "Number of City Feature" = n()
@@ -49,8 +49,9 @@ all.summary.data <-  join_all(list(bike.neighborhood,
                tennis.courts.by.neighborhood),
                by= 'Neighborhood', type = 'left')
 
+#this is the map of Seattle with all the Neighborhoods
 neighborhood.map <- ggplot(WA.df) +
-  aes(long,lat,group=group) +
+  aes(long,lat,group=group, text = paste("Neighborhood", all.summary.data$Neighborhood)) +
   geom_polygon() +
   geom_path(color="white") +
   coord_equal() +
@@ -58,3 +59,12 @@ neighborhood.map <- ggplot(WA.df) +
 
 
 #now we need to add hover over feature to the map using the all.summary.data frame from above!
+
+
+
+
+
+
+
+
+

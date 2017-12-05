@@ -31,3 +31,13 @@ shinyUI(navbarPage('Seattle Median House Prices',
                             )
                           )
 ))
+
+
+
+
+neighborhood.map <- ggplot(WA.df) +
+  aes(long,lat,group=group, text = paste("Neighborhood", all.summary.data$Neighborhood)) +
+  geom_polygon() +
+  geom_path(color="white") +
+  coord_equal() +
+  scale_fill_brewer("Seattle Neighborhoods")
