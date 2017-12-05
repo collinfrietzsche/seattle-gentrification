@@ -9,7 +9,13 @@ output: html_document
 source('hannah_gavin_csv_data.R')
 library(knitr)
 ```
+# Table of Seattle Neighborhood Data
+This is a summary table of our data on Seattle's neighborhoods.
 
 ```{r eval=TRUE, echo=FALSE}
 kable(all.summary.data)
 ```
+
+# Summary of Neighborhood Data
+
+Here are some key takeaways from the table above. There are a total of `r sum(all.summary.data$"Number of Bike Racks")` bike racks in Seattle. Out of the `r nrow(all.summary.data)` neighborhoods, only `r length(which(!is.na(all.summary.data$"Number of Public Spaces")))` have public spaces. The neighborhood with the most public garages and parking lots is `r all.summary.data[which.max(all.summary.data$"Number of Garages and Parking Lots"), "Neighborhood"]` with `r all.summary.data[which.max(all.summary.data$"Number of Garages and Parking Lots"), "Number of Garages and Parking Lots"]` total. The average number of food banks and tennis courts per neighboorhood in Seattle are `r sum(all.summary.data$"Number of Food Banks", na.rm = TRUE)/nrow(all.summary.data)` and `r sum(all.summary.data$"Number of Tennis Courts", na.rm = TRUE)/nrow(all.summary.data)`, respectively.
