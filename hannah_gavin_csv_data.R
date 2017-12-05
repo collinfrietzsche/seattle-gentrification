@@ -9,7 +9,7 @@ library("ggmap")
 source('kyle_lindquist_csv_data.R')
 
 # Read in Neighborhood Data
-WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/")
+WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/ZillowNeighborhoods-WA.shp")
 WA@data$id = rownames(WA@data)
 WA.points = fortify(WA, region="id")
 WA.df = join(WA.points, WA@data, by="id") %>%
