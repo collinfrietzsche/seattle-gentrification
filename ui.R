@@ -12,7 +12,24 @@ names <- df$RegionName
 
 # Make the map, x - years, y - price
 shinyUI(navbarPage('Seattle Median House Prices',
-                   # Create a tab panel for your map
+                   # Home Page
+                   tabPanel('Home Page',
+                            titlePanel("Home Page"),
+                            # Create sidebar layout
+                            sidebarLayout(
+                              # Side Bars
+                              sidebarPanel(
+                                selectInput('neighborhood', label = 'Select Neighborhood:', 
+                                            choices = names)
+                              ),  
+                              # Main panel display plotly map
+                              mainPanel(
+                                plotlyOutput('scatter')
+                              )
+                            )
+                   ),
+                   
+                   # Scatter Plot
                    tabPanel('Scatter',
                             titlePanel("Price vs Time"),
                             # Create sidebar layout
@@ -30,6 +47,8 @@ shinyUI(navbarPage('Seattle Median House Prices',
                               )
                             )
                           ),
+                   
+                   # Map
                    tabPanel('Map',
                             titlePanel("Maps"),
                             # Create sidebar layout
@@ -44,6 +63,23 @@ shinyUI(navbarPage('Seattle Median House Prices',
                               # Main panel display plotly map
                               mainPanel(
                                 plotlyOutput('map')
+                              )
+                            )
+                   ),
+                   
+                   # About Us
+                   tabPanel('About Us',
+                            titlePanel("About Us"),
+                            # Create sidebar layout
+                            sidebarLayout(
+                              # Side Bars
+                              sidebarPanel(
+                                selectInput('neighborhood', label = 'Select Neighborhood:', 
+                                            choices = names)
+                              ),  
+                              # Main panel display plotly map
+                              mainPanel(
+                                plotlyOutput('scatter')
                               )
                             )
                    )
