@@ -15,19 +15,8 @@ names <- df$RegionName
 shinyUI(navbarPage('Exploring Gentrification in Seattle',
                    # Home Page
                    tabPanel('Home Page',
-                            titlePanel("Home Page"),
-                            # Create sidebar layout
-                            sidebarLayout(
-                              # Side Bars
-                              sidebarPanel(
-                                selectInput('neighborhood', label = 'Select Neighborhood:', 
-                                            choices = names)
-                              ),  
-                              # Main panel display plotly map
-                              mainPanel(
-                                plotlyOutput('scatter')
-                              )
-                            )
+                            titlePanel("Home")
+                          
                    ),
                    
                    # Scatter Plot
