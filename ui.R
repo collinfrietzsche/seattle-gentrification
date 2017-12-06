@@ -11,7 +11,7 @@ names <- df$RegionName
 ####################### source this
 
 # Make the map, x - years, y - price
-shinyUI(navbarPage('Seattle Median House Prices',
+shinyUI(navbarPage('Exploring Gentrification in Seattle',
                    # Home Page
                    tabPanel('Home Page',
                             titlePanel("Home Page"),
@@ -72,7 +72,7 @@ shinyUI(navbarPage('Seattle Median House Prices',
                             tags$p("We are a group of students in Informatics 201, Technical Foundations, at the University of Washington.", align = "center"),
                             tags$p("This project was created by ", strong("Hannah, Kyle, James, and Collin"), "as a final for the class.", align = "center"),
                             tags$p("We chose to investigate the components of gentrification within Seattle becayse it is an important topic of discussion in civic life.", align = "center")
-                            
+                          
                    )
 ))
 
