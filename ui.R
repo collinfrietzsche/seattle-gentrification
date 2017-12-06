@@ -1,5 +1,7 @@
 library(shiny)
 library(plotly)
+install.packages("shinythemes")
+library(shinythemes)
 
 df <- read.csv('./data_modified/Seattle_Median_House_Prices.csv', stringsAsFactors = FALSE, check.names = FALSE)
 # Arrange region name in order
@@ -12,7 +14,10 @@ names <- df$RegionName
 
 
 # Make the map, x - years, y - price
-shinyUI(navbarPage('Exploring Gentrification in Seattle',
+shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
+                  
+                   title = 'Exploring Gentrification in Seattle',
+                   
                    # Home Page
                    tabPanel('Home Page',
                             titlePanel("Home")
