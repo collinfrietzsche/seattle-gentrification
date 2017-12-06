@@ -1,4 +1,5 @@
 # Map stuff
+library("leafletR")
 library("rgdal") # librarys sp, will use proj.4 if installed
 library("maptools")
 library("ggplot2")
@@ -7,27 +8,63 @@ library("dplyr")
 library("rgeos")
 library("ggmap")
 
-# Read in Neighborhood Data
-WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/ZillowNeighborhoods-WA.shp")
-WA@data$id = rownames(WA@data)
-WA.points = fortify(WA, region="id")
-WA.df = join(WA.points, WA@data, by="id") %>%
-  filter(City == "Seattle") # only grab data local to seattle
 
-# CRS shizzz
-CRS.new<-CRS("+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0+datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0")
+police.incidents <- read.csv('./data_modified/Police_Incidents-modified.csv', stringsAsFactors = FALSE)
+# provides num of police incidents by type of offense
+police.incidents.by.neighborhoods <- group_by(police.incidents, Neighborhood) %>%
+  summarise(
+    Incidents = n()
+  ) %>%
+  rename(Name = Neighborhood)
 
-# Apply CRS
-proj4string(WA) <- CRS.new 
+# Read in WA Neighborhood Data
+WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/")
+SEA <- WA[WA$City == "Seattle",]
+SEA@data <- left_join(SEA@data, police.incidents.by.neighborhoods, by = "Name")
+SEA@data$id = rownames(SEA@data)
+SEA.points = fortify(SEA, region="id")
+SEA.df = join(SEA.points, SEA@data, by="id")
+# SEA@data$Colour <- "#FFFFFF"
 
-# Plot neighborhood
-ggplot(WA.df) +
-  aes(long,lat,group=group) +
-  geom_polygon() +
-  geom_path(color="white") +
-  coord_equal() +
-  scale_fill_brewer("Seattle Neighborhoods")
+# # Create Heat Map w/ "hotter" (more incidents) red => "cooler" (fewer incidents) green
+# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 0] <- "#047331"
+# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 0.75] <- "#388C04"
+# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 1.5] <- "#DAC719"
+# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 3] <- "#E16519"
+# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 5] <- "#CA0300"
+# 
+# plot(SEA, col=SEA@data$Colour, border=NA)
 
-# Test location
-# result <- geocode("6724 24th Ave NW Seattle, WA 98117", output = "latlona", source = "google")
-# test.location <-SpatialPoints(list(result$lon,result$lat))
+subdat <- SEA
+subdat <- spTransform(subdat, CRS("+init=epsg:4326"))
+subdat.data <- subdat@data[,c("id", "Name", "Incidents")]
+subdat.data <- rename(subdat.data, ID = id)
+subdat.data$ID <- as.character(as.numeric(subdat.data$ID) + 92)
+subdat <- gSimplify(subdat, tol = 0.01, topologyPreserve = TRUE)
+subdat <- SpatialPolygonsDataFrame(subdat, data = subdat.data, match.ID = FALSE)
+
+leafdata <- paste0("./spacial.geojson")
+writeOGR(subdat, leafdata, layer="", driver = "GeoJSON")
+
+cuts <- round(quantile(subdat$Incidents, probs = seq(0, 1, 0.20), na.rm = TRUE), 0)
+cuts[1] <- 0
+
+popup <- c("Name", "Incidents")
+
+sty <- styleGrad(prop = "Incidents", breaks = cuts, right = FALSE, style.par = "col",
+                 style.val = rev(heat.colors(5)), leg = "Incidents Sep 2016", lwd = 1)
+
+map <- leaflet(data = leafdata, dest = ".", style=sty,
+               title = "index", base.map = "osm", 
+               incl.data = TRUE, popup = popup)
+
+browseURL(map)
+
+# # Plot neighborhood
+# plot_ly(
+#   ggplot(WA.df) +
+#     aes(long,lat,group=group, geom_text(label_points)) +
+#     geom_polygon() +
+#     geom_path(color="white") +
+#     coord_equal() +
+#     scale_fill_brewer("Seattle Neighborhoods"))
