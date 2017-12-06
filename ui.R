@@ -67,20 +67,20 @@ shinyUI(navbarPage('Seattle Median House Prices',
                             )
                    ),
                    
-                   # About Us
                    tabPanel('About Us',
-                            titlePanel("About Us"),
-                            # Create sidebar layout
-                            sidebarLayout(
-                              # Side Bars
-                              sidebarPanel(
-                                selectInput('neighborhood', label = 'Select Neighborhood:', 
-                                            choices = names)
-                              ),  
-                              # Main panel display plotly map
-                              mainPanel(
-                                plotlyOutput('scatter')
-                              )
-                            )
+                            tags$h1("About Us", align = "center", class = "header"),
+                            tags$p("We are a group of students in Informatics 201, Technical Foundations, at the University of Washington.", align = "center"),
+                            tags$p("This project was created by ", strong("Hannah, Kyle, James, and Collin"), "as a final for the class.", align = "center"),
+                            tags$p("We chose to investigate the components of gentrification within Seattle becayse it is an important topic of discussion in civic life.", align = "center")
+                            
                    )
 ))
+
+
+
+         
+         
+         
+         
+         
+         
