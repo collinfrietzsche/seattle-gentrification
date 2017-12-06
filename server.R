@@ -1,5 +1,6 @@
 library(dplyr)
 library(plotly)
+library(leafletR)
 
 buildMinMaxList <- function(min, max) {
   range <- c()
@@ -23,6 +24,13 @@ names <- df$RegionName
 ####################### source this
 
 shinyServer(function(input, output) {
+  
+  ###### Police Incident Heatmap ######
+  # output$police.density <- renderLeaflet({
+  #   map
+  # })
+  
+  ###### Time vs Housing Price ######
   output$scatter <- renderPlotly({
     # Get the row of the neighborhood
     region.data <- df %>%

@@ -1,7 +1,9 @@
 library(shiny)
 library(plotly)
-install.packages("shinythemes")
 library(shinythemes)
+library(leafletR)
+
+source("./functions.R")
 
 df <- read.csv('./data_modified/Seattle_Median_House_Prices.csv', stringsAsFactors = FALSE, check.names = FALSE)
 # Arrange region name in order

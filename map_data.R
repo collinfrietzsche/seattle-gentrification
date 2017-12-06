@@ -30,16 +30,6 @@ SEA@data[is.na(SEA@data)] <- 0
 SEA@data$id = rownames(SEA@data)
 SEA.points = fortify(SEA, region="id")
 SEA.df = join(SEA.points, SEA@data, by="id")
-# SEA@data$Colour <- "#FFFFFF"
-
-# # Create Heat Map w/ "hotter" (more incidents) red => "cooler" (fewer incidents) green
-# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 0] <- "#047331"
-# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 0.75] <- "#388C04"
-# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 1.5] <- "#DAC719"
-# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 3] <- "#E16519"
-# SEA@data$Colour[(as.numeric(as.character(SEA@data$Count)) / 100) > 5] <- "#CA0300"
-# 
-# plot(SEA, col=SEA@data$Colour, border=NA)
 
 subdat <- SEA
 subdat <- spTransform(subdat, CRS("+init=epsg:4326"))
@@ -63,16 +53,13 @@ sty <- styleGrad(prop = "Incidents", breaks = cuts, right = FALSE, style.par = "
 map <- leaflet(data = leafdata, dest = ".", style=sty,
                title = "index", base.map = "osm", 
                incl.data = TRUE, popup = popup)
+# Use with shiny
+# Server
+# output$mymap <- renderLeaflet({
+#   map
+# })
+# UI
+# leafletOutput("mymap")
 
 browseURL(map)
 
-
-
-# # Plot neighborhood
-# plot_ly(
-#   ggplot(WA.df) +
-#     aes(long,lat,group=group, geom_text(label_points)) +
-#     geom_polygon() +
-#     geom_path(color="white") +
-#     coord_equal() +
-#     scale_fill_brewer("Seattle Neighborhoods"))
