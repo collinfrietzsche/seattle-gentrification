@@ -53,13 +53,7 @@ sty <- styleGrad(prop = "Incidents", breaks = cuts, right = FALSE, style.par = "
 map <- leaflet(data = leafdata, dest = ".", style=sty,
                title = "index", base.map = "osm", 
                incl.data = TRUE, popup = popup)
-# Use with shiny
-# Server
-# output$mymap <- renderLeaflet({
-#   map
-# })
-# UI
-# leafletOutput("mymap")
+
 
 browseURL(map)
 

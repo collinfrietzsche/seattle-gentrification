@@ -35,6 +35,19 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                             )
                           ),
                    
+                   # Police Incident Page
+                   tabPanel('Police Incidents',
+                            titlePanel("Police Incidents"),
+                            mainPanel(fluidRow(
+                              htmlOutput("police.density")
+                            )
+                            )
+                   ),
+                   
+                   tabPanel('Lookup Information',
+                            titlePanel("Address Statistics")
+                   ),
+                   
                    #PUT TABLE HERE KYLE
                    tabPanel('General Table of Information',
                             titlePanel("Table")

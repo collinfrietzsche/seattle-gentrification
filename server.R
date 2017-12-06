@@ -1,16 +1,17 @@
 library(dplyr)
 library(plotly)
-library(leafletR)
+library(leaflet)
 
 source("./data_wrangle.R")
 
 shinyServer(function(input, output) {
   
   ###### Police Incident Heatmap ######
-  # output$police.density <- renderLeaflet({
-  #   map
-  # })
-  
+  output$police.density <- renderUI({
+    my_test <- tags$iframe(src="http://students.washington.edu/collinaf/info201/", width = "100%", height = "500px")
+    return(my_test)
+  })
+
   ###### Time vs Housing Price ######
   output$scatter <- renderPlotly({
     # Get the row of the neighborhood
@@ -31,8 +32,6 @@ shinyServer(function(input, output) {
     for(i in 1:length(range.data)) {
       values[i] <- range.data[1, i]
     }
-    
-    #range.data[1,]
 
     return(plot_ly(data = price.time.df, x= range, y= values,
                    xlab = range, ylab = values,
