@@ -14,7 +14,11 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                    # Home Page
                    tabPanel('Home Page',
                             titlePanel("Home")
-                          
+                   
+                  # Police Activity tab                 
+                   ),
+                   tabPanel('Police Activity',
+                            titlePanel("Police Activity")
                    ),
                    
                    # Scatter Plot
