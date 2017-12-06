@@ -15,6 +15,7 @@ Our main audience for this project is people looking to move in the Seattle area
 1. How does access to public space impact housing prices and land use?
 2. What dictates better “urban design”?
 3. Does “better” design make spaces safer?
+4. How have housing prices changes over time?
 
 
 
