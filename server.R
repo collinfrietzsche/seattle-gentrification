@@ -2,26 +2,7 @@ library(dplyr)
 library(plotly)
 library(leafletR)
 
-buildMinMaxList <- function(min, max) {
-  range <- c()
-  check.range <- ((min*100):(max*100))/100
-  for(i in 1:length(check.range)) {
-    test.val <- (as.double(substr(as.character(check.range[i]), 5, 7)) / 0.12)
-    if (!is.na(test.val) & test.val <= 1) {
-      range <- c(range, as.character(check.range[i]))
-    }
-  }
-  return(range)
-}
-
-df <- read.csv('./data_modified/Seattle_Median_House_Prices.csv', stringsAsFactors = FALSE, check.names = FALSE)
-# Arrange region name in order
-df <- df %>%
-  select(2:length(df)) %>%
-  arrange(RegionName)
-# Get all the names in the region
-names <- df$RegionName
-####################### source this
+source("./data_wrangle.R")
 
 shinyServer(function(input, output) {
   
@@ -33,7 +14,7 @@ shinyServer(function(input, output) {
   ###### Time vs Housing Price ######
   output$scatter <- renderPlotly({
     # Get the row of the neighborhood
-    region.data <- df %>%
+    region.data <- price.time.df %>%
       filter(RegionName == input$neighborhood)
       # filter(RegionName == "Admiral")
     
@@ -53,7 +34,7 @@ shinyServer(function(input, output) {
     
     #range.data[1,]
 
-    return(plot_ly(data = df, x= range, y= values,
+    return(plot_ly(data = price.time.df, x= range, y= values,
                    xlab = range, ylab = values,
                    type = 'scatter', mode = 'markers', #color = ~type
                    hoverinfo = 'text',

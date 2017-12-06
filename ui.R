@@ -3,17 +3,7 @@ library(plotly)
 library(shinythemes)
 library(leafletR)
 
-source("./functions.R")
-
-df <- read.csv('./data_modified/Seattle_Median_House_Prices.csv', stringsAsFactors = FALSE, check.names = FALSE)
-# Arrange region name in order
-df <- df %>%
-  select(2:length(df)) %>%
-  arrange(RegionName)
-# Get all the names in the region
-names <- df$RegionName
-####################### source this
-
+source("./data_wrangle.R")
 
 # Make the map, x - years, y - price
 shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
@@ -34,7 +24,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                               # Side Bars
                               sidebarPanel(
                                 selectInput('neighborhood', label = 'Select Neighborhood:', 
-                                            choices = names),
+                                            choices = price.time.names),
                                 sliderInput("time", "Time range:", min = 2010.01, max = 2017.09,
                                             value = c(2010.05, 2016.1), step = 0.01)  ##### change the step = ?
                               ),  

@@ -61,3 +61,11 @@ police.housing.df <- median.housing.prices %>%
   select(RegionName, `2016.09`) %>%
   rename(Neighborhood = RegionName, Price = `2016.09`) %>%
   left_join(police.incidents.by.neighborhood, by = "Neighborhood")
+
+# Arrange region name in order
+price.time.df <- median.housing.prices %>%
+  select(2:length(median.housing.prices)) %>%
+  arrange(RegionName)
+
+# Get all the names in the region
+price.time.names <- price.time.df$RegionName
