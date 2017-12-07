@@ -57,7 +57,7 @@ shinyServer(function(input, output) {
                                   "Years.Month: ", range)) %>%
              add_lines(x = range, y = values, name = "Trend") %>%
              layout(title = paste0(input$neighborhood, " Neighborhood"),
-                    xaxis = list(title = "Time"),
+                    xaxis = list(title = "Time (Year.Month)"),
                     yaxis = list(title = "Price ($)"),
                     margin = list(b = 200))   #### regression line abline(lm(values~range), col="red")
     )
