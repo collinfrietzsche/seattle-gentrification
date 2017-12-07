@@ -8,7 +8,7 @@ library(leafletR)
 source("./data_wrangle.R")
 
 # Make the map, x - years, y - price
-shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
+shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                   
                    title = 'Exploring Housing Prices in Seattle',
                    
@@ -16,7 +16,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                    tabPanel('Home Page',
                             #titlePanel("Home"),
                             tags$div(id = "cover",
-                                     tags$h3("Introduction", class = "cover-content", align = "center")
+                                     tags$h1("Introduction", class = "cover-content", align = "center")
                             ),
                             tags$h3("Overview of Project", class = "header"),
                             tags$h4("Purpose: We wanted to look at how the housing prices in greater Seattle have changed over time.",
@@ -103,7 +103,9 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                             tags$h1("About Us", align = "center", class = "header"),
                             tags$p("We are a group of students in Informatics 201, Technical Foundations, at the University of Washington.", align = "center"),
                             tags$p("This project was created by ", strong("Hannah, Kyle, James, and Collin"), "as a final for the class.", align = "center"),
-                            tags$p("We chose to investigate the components of gentrification within Seattle because it is an important topic of discussion in civic life.", align = "center")
+                            tags$p("We chose to investigate the housing prices in Seattle as we have found through
+                                   personal experience that it is very expensive to live in this beautiful
+                                   city.", align = "center")
                           
                    )
 ))
