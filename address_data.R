@@ -1,18 +1,22 @@
 # XML API
 library("httr")
 library("XML")
+library(plotly)
 
 source('api_keys.R')
 
 parseAddress <- function(full.address) {
   address <- list()
+  geo.code <- geocode(full.address, output = "latlona", source = "google")
   address.ret <- trimws(
     strsplit(
-      geocode(full.address, output = "latlona", source = "google")$address,
+      geo.code$address,
       split = ",")[[1]]
   )
   address$street <- address.ret[1]
   address$city.state.zip <- paste(address.ret[2], address.ret[3])
+  address$lat <- geo.code$lat
+  address$long <- geo.code$lon
   return(address)
 }
 
@@ -37,6 +41,30 @@ seattle.address <- "4742 19th Ave NE, Seattle, WA 98105"
 ballard.address <- "2226 NW 62nd St APT 3, Seattle, WA 98107"
 getHousePrice(seattle.address)
 getHousePrice(ballard.address)
+
+data <- data.frame(parseAddress(seattle.address), stringsAsFactors = FALSE)
+
+
+g <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showland = TRUE,
+  landcolor = toRGB("gray85"),
+  subunitwidth = 1,
+  countrywidth = 1,
+  subunitcolor = toRGB("white"),
+  countrycolor = toRGB("white"),
+  rotation = list(),
+  lonaxis = list(range = c(-125, -115)),
+  lataxis = list(range = c(45, 49))
+)
+
+plot_geo(data, locationmode = 'USA-states', sizes = c(1, 50)) %>%
+  add_markers(
+    x = ~long, y = ~lat, size = 1, hoverinfo = "text",
+    text = ~paste(street, city.state.zip)
+  ) %>%
+  layout(title = 'Address Location', geo = g)
 
 
 # Zillow site: https://www.zillow.com/howto/api/neighborhood-boundaries.htm

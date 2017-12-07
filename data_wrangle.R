@@ -10,6 +10,7 @@ library("ggmap")
 
 library("plyr")
 library("dplyr")
+library("tidyr")
 
 source("./load_all_csv.R")
 source("./functions.R")
@@ -54,16 +55,17 @@ food.bank.neighborhood <- group_by(food.banks, Neighborhood)%>%
 
 #provides the number of city features in the dataset 
 #FIX THIS we need the data frame to include neighborhood 
-sum.city.feature <- group_by(neighborhood.details, Neighborhood, City.Feature)%>%
+sum.city.feature <- group_by(neighborhood.details, Neighborhood, City.Feature) %>%
   summarise(
     "Number of City Feature" = n()
-  )
+  ) %>%
+  spread(key = City.Feature, value = "Number of City Feature")
 
 
 #we need to fix sum.city.feature by adding the groupby Neighborhood!!!!!
 all.summary.data <-  join_all(list(bike.neighborhood,
                                    food.bank.neighborhood,
-                                   #sum.city.feature, FIX THIS
+                                   sum.city.feature,
                                    garages.parking.by.neighborhood,
                                    public.spaces.by.neighborhood,
                                    tennis.courts.by.neighborhood),

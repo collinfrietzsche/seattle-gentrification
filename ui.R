@@ -76,7 +76,14 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                    tabPanel('General Table of Information',
                             titlePanel("This table provides the number of city features in 
                                        each neighborhood as described by the column names"),
-                            DT::dataTableOutput("mytable")
+                            checkboxGroupInput("all.table", "Choose Columns:",
+                                                choiceNames = colnames(all.summary.data),
+                                                choiceValues = colnames(all.summary.data),
+                                               selected = "Neighborhood",
+                                                inline = TRUE
+                            ),
+                            DT::dataTableOutput("mytable"),
+                            style = 'overflow-x: scroll'
                    ),
                    
                    tabPanel('About Us',

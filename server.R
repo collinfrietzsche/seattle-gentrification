@@ -65,6 +65,11 @@ shinyServer(function(input, output) {
   
   ###### Summary Table ######
   output$mytable = DT::renderDataTable({
-    all.summary.data
+    selections <- c()
+    for(i in 1:length(input$all.table)) {
+      selections <- c(selections, input$all.table[i])
+    }
+    all.summary.data %>%
+      select(selections)
   })
 })
