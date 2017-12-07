@@ -9,7 +9,7 @@
 This data comes from Seattle’s Open Data website. We are focusing on data from urban design and pricing in order to provide our users with information regarding the housing prices in Seattle. 
 
 #### Audiences for this project
-Our main audience for this project is people looking to move in the Seattle area. This data allows our audience to view the housing prices of specified neighborhoods and explore other factors within the neighboorhood they are exploring. We are framing our project around this audience, hoping to provide insight regarding the housing prices in Seattle neighborhoods. 
+Our main audience for this project is people looking to move in the Seattle area. This data allows our audience to view the housing prices of specified neighborhoods and explore other factors within the neighboorhood they are interested in. We are framing our project around this audience, hoping to provide insight regarding the housing prices in Seattle neighborhoods. 
 
 ##### Questions that will be investigated
 1. How have housing prices in Seattle changed over time?
