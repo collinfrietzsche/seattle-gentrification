@@ -63,6 +63,88 @@ shinyServer(function(input, output) {
     )
   })
   
+  #### Address Search Summary ####
+  
+  reactive.values <- reactiveValues(neighborhood = "", price = 0.0)
+  
+  reactive.neighborhood <- observe({
+    reactive.values$neighborhood <- as.character(getAddressNeighborhood(input$user.address))
+    reactive.values$price <- getHousePrice(input$user.address)
+  })
+  
+  output$address.map <- renderPlotly({
+    if(!is.na(input$user.address) & length(input$user.address > 10)) {
+      user.data <- getAddressNeighborhood(input$user.address)
+      
+      g <- list(
+        scope = 'usa',
+        projection = list(type = 'albers usa'),
+        showland = TRUE,
+        landcolor = toRGB("gray85"),
+        subunitwidth = 1,
+        countrywidth = 1,
+        subunitcolor = toRGB("white"),
+        countrycolor = toRGB("white"),
+        lonaxis = list(range = c(-125, -115)),
+        lataxis = list(range = c(45, 49))
+      )
+      
+      return(plot_geo(user.data, locationmode = 'USA-states', sizes = c(1, 50)) %>%
+        add_markers(
+          x = ~long, y = ~lat, size = 1, hoverinfo = "text",
+          text = ~paste(street, city.state.zip, "\n",
+                        "Latitude:", lat, "\n",
+                        "Longitude:", long)
+        ) %>%
+        layout(title = 'Address Location', geo = g))
+    }
+    return(NA)
+  })
+  
+  output$address.neighborhood <- renderText({
+    paste(reactive.values$neighborhood[5], "statistics:")
+  })
+  
+  output$address.parks <- renderUI({
+    neighborhood <- reactive.values$neighborhood[5]
+    neighborhood.stats <- calcDiffNeighborhood(neighborhood)
+    HTML(paste0(neighborhood, " has ", percentRound(neighborhood.stats$parks), "% off of the average number of parks."))
+  })
+  
+  output$address.playareas <- renderUI({
+    neighborhood <- reactive.values$neighborhood[5]
+    neighborhood.stats <- calcDiffNeighborhood(neighborhood)
+    HTML(paste0(neighborhood, " has ", percentRound(neighborhood.stats$play.areas), "% off of the average number of play areas."))
+  })
+  
+  output$address.landmarks <- renderUI({
+    neighborhood <- reactive.values$neighborhood[5]
+    neighborhood.stats <- calcDiffNeighborhood(neighborhood)
+    HTML(paste0(neighborhood, " has ", percentRound(neighborhood.stats$landmarks), "% off of the average number of play landmarks."))
+  })
+  
+  output$address.viewpoints <- renderUI({
+    neighborhood <- reactive.values$neighborhood[5]
+    neighborhood.stats <- calcDiffNeighborhood(neighborhood)
+    HTML(paste0(neighborhood, " has ", percentRound(neighborhood.stats$viewpoints), "% off of the average number of viewpoints"))
+  })
+  
+  output$address.garages <- renderUI({
+    neighborhood <- reactive.values$neighborhood[5]
+    neighborhood.stats <- calcDiffNeighborhood(neighborhood)
+    HTML(paste0(neighborhood, " has ", percentRound(neighborhood.stats$garages), "% off of the average number of garages"))
+  })
+  
+  output$address.bikes <- renderUI({
+    neighborhood <- reactive.values$neighborhood[5]
+    neighborhood.stats <- calcDiffNeighborhood(neighborhood)
+    HTML(paste0(neighborhood, " has ", percentRound(neighborhood.stats$bikes), "% off of the average number of bikes."))
+  })
+  
+  output$address.price <- renderText({
+    paste0("House Price for: ", input$user.address, ":\n$", reactive.values$price$amount, " ", reactive.values$price$currency)
+  })
+  
   ###### Summary Table ######
   output$mytable = DT::renderDataTable({
     selections <- c()

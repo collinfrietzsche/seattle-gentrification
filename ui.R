@@ -88,10 +88,23 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                    ),
                    
                    tabPanel('Lookup Information',
-                            titlePanel("Address Statistics")
-                   ),
+                            titlePanel("Address Statistics"),
+                            tags$p("Seattle Address: 4741 19th Ave NE, Seattle, WA 98105"),
+                            tags$p("Ballard Address: 2226 NW 62nd St APT 3, Seattle, WA 98107"),
+                            textInput("user.address", h3("Address Information"), 
+                                      value = "2226 NW 62nd St APT 3, Seattle, WA 98107"),
+                            plotlyOutput("address.map"),
+                            tags$h5(textOutput("address.price")),
+                            tags$h3(textOutput("address.neighborhood")),
+                            tags$h5("For this neighborhood, we found that..."),
+                            tags$p(htmlOutput("address.parks")),
+                            tags$p(htmlOutput("address.playareas")),
+                            tags$p(htmlOutput("address.viewpoints")),
+                            tags$p(htmlOutput("address.landmarks")),
+                            tags$p(htmlOutput("address.garages")),
+                            tags$p(htmlOutput("address.bikes"))
+                            ),
                    
-                   #PUT TABLE HERE KYLE
                    tabPanel('General Table of Information',
                             titlePanel("Table of City Features"),
                             tags$h3("Select the areas of interest and see how they differ in 

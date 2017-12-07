@@ -71,6 +71,8 @@ all.summary.data <-  join_all(list(bike.neighborhood,
                                    tennis.courts.by.neighborhood),
                               by= 'Neighborhood', type = 'left')
 
+all.summary.means <- colMeans(all.summary.data[2:length(all.summary.data)], na.rm = TRUE)
+
 # Grab data from Sept 2016 to be the same
 police.housing.df <- median.housing.prices %>%
   select(RegionName, `2016.09`) %>%
@@ -85,17 +87,21 @@ price.time.df <- median.housing.prices %>%
 # Get all the names in the region
 price.time.names <- price.time.df$RegionName
 
+CRS.new<-CRS("+proj=aea +lat_1=29.5 +lat_2=45.5 +lat_0=37.5 +lon_0=-96 +x_0=0 +y_0=0+datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0")
 
 # Save Police Heatmap
 # Read in WA Neighborhood Data
 WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/ZillowNeighborhoods-WA.shp")
+proj4string(WA) <- CRS.new
 SEA <- WA[WA$City == "Seattle",]
 # SEA@data <- join(SEA@data, police.incidents.by.neighborhood, by = "Name")
 SEA@data[is.na(SEA@data)] <- 0
 SEA@data$id = rownames(SEA@data)
 SEA.points = fortify(SEA, region="id")
 SEA.df = join(SEA.points, SEA@data, by="id")
-# 
+
+
+##### Not used after externally hosting to get running on shiny ######
 # subdat <- SEA
 # subdat <- spTransform(subdat, CRS("+init=epsg:4326"))
 # subdat.data <- subdat@data[,c("id", "Name", "Incidents", "Price")]
