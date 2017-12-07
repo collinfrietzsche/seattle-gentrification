@@ -23,7 +23,10 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                             tags$h3("Questions", class = "header"),
                             
                             # Scatter Plot
-                            tags$h3("Price vs Year", class = "header"),
+                            tags$h3("Price vs. Year", class = "header"),
+                            tags$h5("In the following graph, you can select the specific neighborhood in 
+                                    a specific time range that you are interested in. You can clearly see the
+                                    how are the housing prices in these areas moving within the time range you selected.", class = "para 1"),
                             # Create sidebar layout
                             sidebarLayout(
                               # Side Bars
@@ -38,7 +41,6 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                                 plotlyOutput('scatter')
                               )
                             )
-                            
                    ),
                    
                    # Police Incident Page
