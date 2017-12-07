@@ -1,9 +1,12 @@
 library(dplyr)
 library(plotly)
+library("httr")
+library("XML")
 library(leaflet)
 library(DT)
 
 source("./data_wrangle.R")
+source("./api_keys.R")
 
 shinyServer(function(input, output) {
   
