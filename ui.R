@@ -18,6 +18,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                             tags$div(id = "cover",
                                      tags$h1("Introduction", class = "cover-content", align = "center")
                             ),
+                            img(src='seattle.jpg', align = "center"),
                             tags$h3("Overview of Project", class = "header"),
                             tags$h4("Purpose: We wanted to look at how the housing prices in greater Seattle have changed over time.",
                                     tags$br(),"Methods: We used Seattle's Open Data website to look at median housing prices in Seattle and its surrounding neighborhoods. We also looked at other factors in these neighborhoods such as the amount of police activity and the quantity of various public facilities.",
