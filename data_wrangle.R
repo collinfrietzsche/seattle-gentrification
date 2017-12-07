@@ -86,7 +86,7 @@ price.time.names <- price.time.df$RegionName
 
 # Save Police Heatmap
 # Read in WA Neighborhood Data
-WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/")
+WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/ZillowNeighborhoods-WA.shp")
 SEA <- WA[WA$City == "Seattle",]
 # SEA@data <- join(SEA@data, police.incidents.by.neighborhood, by = "Name")
 SEA@data[is.na(SEA@data)] <- 0

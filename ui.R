@@ -52,8 +52,8 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                    
                    #PUT TABLE HERE KYLE
                    tabPanel('General Table of Information',
-                            titlePanel("Table")
-                            
+                            titlePanel("Table"),
+                            DT::dataTableOutput("mytable")
                    ),
                    
                    tabPanel('About Us',
