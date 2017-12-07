@@ -19,7 +19,16 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                                      tags$h3("Introduction", class = "cover-content", align = "center")
                             ),
                             tags$h3("Overview of Project", class = "header"),
-                            tags$h4("Here is where you can put overview information", class = "para 1"),
+                            tags$h4("Purpose: We wanted to look at how the housing prices in greater Seattle have changed over time.",
+                                    tags$br(),"Methods: We used Seattle's Open Data website to look at median housing prices in Seattle and its surrounding neighborhoods. We also looked at other factors in these neighborhoods such as the amount of police activity and the quantity of various public facilities.",
+                                    tags$br(),"Claim: We believe that housing prices have increased over time due to various factors. (not sure what else to add here)",
+                                    tags$br(),tags$br(),
+                                    "Interpretation of Results:
+                                    
+                                    There is a positive, linear trend between housing prices and time, in general.",tags$br(),
+                                    "We were expecting a stronger correlation between housing price and police activity but there isn't too strong of a negative trend.",tags$br(),
+                                    "The areas with the most police activity are mainly Downtown, Capitol Hill and University District.",tags$br(),
+                                    "The number of bike racks and public garages/parking lots are highest in areas where the most people are visiting where as the number of food banks and tennis courts are more spread all over the place.", class = "para 1"),
                             tags$h3("Questions", class = "header"),
                             
                             # Scatter Plot
@@ -43,7 +52,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                             ),
                             
                             # Explain examples
-                            tags$h5("Take Admiral Neighborhood for example, we can clearly see housing prices decrease 
+                            tags$h5("Take Admiral Neighborhood from Jan 2017 to Sep 2017 for example, we can clearly see housing prices decrease 
                                     in Feb, May, and Sep in 2017, but the overall housing market is 
                                     increasing significantly. The growth rate is almost 16% over the
                                     course of eight months!", class = "para 1")
