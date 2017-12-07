@@ -62,7 +62,21 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                    tabPanel('Police Incidents',
                             titlePanel("Police Incidents"),
                             mainPanel(fluidRow(
-                              htmlOutput("police.density"),
+                              tags$h3("About the Map:", class  = "header"),
+                              tags$h5("The map below uses colors to display the number of incidents in each
+                                      neighborhood in Seattle. The colors are associated with the values shown in
+                                      the ledgend. To view a particular neighborhood, simply hover over with your mouse.
+                                      As you can see, Univesity District is dark red, which is particularly interesting 
+                                      being students at the University of Washington."),
+                               htmlOutput("police.density"),
+                              tags$h3("About the Scatterplot", class = "header"),
+                              tags$h5("The scatterplot below shows the relationship between housing prices and 
+                                      police incidents. We expected the number of police incidents to cause a 
+                                      decrease in housing prices, however as you can see based on the trend shown in
+                                      the scatterplot, that is not the case. We can assume that location is more 
+                                      important than police activity when determining price in the Seattle area. To 
+                                      get more information on the data, simply hover over the points displayed on the 
+                                      scatterplot to median housing price and number of police incidents for the given neighborhood."),
                               plotlyOutput("police.scatter")
                             )
                             )
