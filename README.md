@@ -1,7 +1,7 @@
 # seattle-gentrification
 # Info201 Group Project
 
-## Check out our website on: https://kslindqu.shinyapps.io/seattle-gentrification/
+## Check out our website on: https://collinfrietzsche.shinyapps.io/seattle-gentrification/
 
 ## Project Description
 
