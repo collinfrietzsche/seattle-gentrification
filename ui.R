@@ -40,7 +40,13 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                               mainPanel(
                                 plotlyOutput('scatter')
                               )
-                            )
+                            ),
+                            
+                            # Explain examples
+                            tags$h5("Take Admiral Neighborhood for example, we can clearly see housing prices decrease 
+                                    in Feb, May, and Sep in 2017, but the overall housing market is 
+                                    increasing significantly. The growth rate is almost 16% over the
+                                    course of eight months!", class = "para 1")
                    ),
                    
                    # Police Incident Page
