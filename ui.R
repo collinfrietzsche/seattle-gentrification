@@ -82,8 +82,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                                                selected = "Neighborhood",
                                                 inline = TRUE
                             ),
-                            DT::dataTableOutput("mytable"),
-                            style = 'overflow-x: scroll'
+                            DT::dataTableOutput("mytable")
                    ),
                    
                    tabPanel('About Us',
