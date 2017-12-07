@@ -59,7 +59,8 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                    
                    #PUT TABLE HERE KYLE
                    tabPanel('General Table of Information',
-                            titlePanel("Table"),
+                            titlePanel("This table provides the number of city features in 
+                                       each neighborhood as described by the column names"),
                             DT::dataTableOutput("mytable")
                    ),
                    
