@@ -1,5 +1,6 @@
 library(shiny)
 library(plotly)
+library(plyr)
 library(shinythemes)
 library(leafletR)
 
@@ -39,7 +40,8 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                    tabPanel('Police Incidents',
                             titlePanel("Police Incidents"),
                             mainPanel(fluidRow(
-                              htmlOutput("police.density")
+                              htmlOutput("police.density"),
+                              plotlyOutput("police.scatter")
                             )
                             )
                    ),

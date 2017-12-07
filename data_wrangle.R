@@ -1,4 +1,16 @@
 # Data Wrangling File
+
+# Map stuff
+library("leafletR")
+library("rgdal") # librarys sp, will use proj.4 if installed
+library("maptools")
+library("ggplot2")
+library("rgeos")
+library("ggmap")
+
+library("plyr")
+library("dplyr")
+
 source("./load_all_csv.R")
 source("./functions.R")
 
@@ -24,7 +36,8 @@ public.spaces.by.neighborhood <- group_by(public.spaces, Neighborhood) %>%
 police.incidents.by.neighborhood <- group_by(police.incidents, Neighborhood) %>%
   summarise(
     "Incidents" = n()
-  )
+  ) %>%
+  rename(Name = Neighborhood)
 
 #provides the count(number) of neighborhoods 
 #do we want to override the existing data frame or create a new one?
@@ -59,8 +72,8 @@ all.summary.data <-  join_all(list(bike.neighborhood,
 # Grab data from Sept 2016 to be the same
 police.housing.df <- median.housing.prices %>%
   select(RegionName, `2016.09`) %>%
-  rename(Neighborhood = RegionName, Price = `2016.09`) %>%
-  left_join(police.incidents.by.neighborhood, by = "Neighborhood")
+  rename(Name = RegionName, Price = `2016.09`) %>%
+  left_join(police.incidents.by.neighborhood, by = "Name")
 
 # Arrange region name in order
 price.time.df <- median.housing.prices %>%
@@ -75,23 +88,22 @@ price.time.names <- price.time.df$RegionName
 # Read in WA Neighborhood Data
 WA <- readOGR(dsn = "./ZillowNeighborhoods-WA/")
 SEA <- WA[WA$City == "Seattle",]
-SEA@data <- left_join(SEA@data, police.incidents.by.neighborhoods, by = "Name") %>%
-  left_join(housing.prices, by = "Name")
+# SEA@data <- join(SEA@data, police.incidents.by.neighborhood, by = "Name")
 SEA@data[is.na(SEA@data)] <- 0
 SEA@data$id = rownames(SEA@data)
 SEA.points = fortify(SEA, region="id")
 SEA.df = join(SEA.points, SEA@data, by="id")
-
-subdat <- SEA
-subdat <- spTransform(subdat, CRS("+init=epsg:4326"))
-subdat.data <- subdat@data[,c("id", "Name", "Incidents", "Price")]
-subdat.data <- rename(subdat.data, ID = id)
-subdat.data$ID <- as.character(as.numeric(subdat.data$ID) + 92)
-subdat <- gSimplify(subdat, tol = 0.01, topologyPreserve = TRUE)
-subdat <- SpatialPolygonsDataFrame(subdat, data = subdat.data, match.ID = FALSE)
-
-leafdata <- paste0("./spacial.geojson")
-writeOGR(subdat, leafdata, layer="", driver = "GeoJSON")
+# 
+# subdat <- SEA
+# subdat <- spTransform(subdat, CRS("+init=epsg:4326"))
+# subdat.data <- subdat@data[,c("id", "Name", "Incidents", "Price")]
+# subdat.data <- rename(subdat.data, ID = id)
+# subdat.data$ID <- as.character(as.numeric(subdat.data$ID) + 92)
+# subdat <- gSimplify(subdat, tol = 0.01, topologyPreserve = TRUE)
+# subdat <- SpatialPolygonsDataFrame(subdat, data = subdat.data, match.ID = FALSE)
+# 
+# leafdata <- paste0("./spacial.geojson")
+# writeOGR(subdat, leafdata, layer="", driver = "GeoJSON")
 
 # cuts <- round(quantile(subdat$Incidents, probs = seq(0, 1, 0.20), na.rm = TRUE), 0)
 # cuts[1] <- 0

@@ -11,6 +11,21 @@ shinyServer(function(input, output) {
     my_test <- tags$iframe(src="http://students.washington.edu/collinaf/info201/", width = "100%", height = "500px")
     return(my_test)
   })
+  
+  ###### Price v Incident Scatter ######
+  output$police.scatter <- renderPlotly({
+    return(plot_ly(data = police.housing.df, x= ~Incidents, y = ~Price,
+                   type = 'scatter', mode = 'markers',
+                   hoverinfo = 'text',
+                   text = ~paste0("Neighborhood: ", Name, "\n",
+                                  "Price: ", Price, "\n",
+                                  "Incidents: ", Incidents)) %>%
+             layout(title = "Price vs # of Incidents",
+                    xaxis = list(title = "Number of Incidents"),
+                    yaxis = list(title = "Price ($)")
+                    )
+    )
+  })
 
   ###### Time vs Housing Price ######
   output$scatter <- renderPlotly({
