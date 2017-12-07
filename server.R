@@ -1,6 +1,7 @@
 library(dplyr)
 library(plotly)
 library(leaflet)
+library(DT)
 
 source("./data_wrangle.R")
 
@@ -60,5 +61,10 @@ shinyServer(function(input, output) {
                     yaxis = list(title = "Price ($)"),
                     margin = list(b = 200))   #### regression line abline(lm(values~range), col="red")
     )
+  })
+  
+  ###### Summary Table ######
+  output$mytable = DT::renderDataTable({
+    all.summary.data
   })
 })
