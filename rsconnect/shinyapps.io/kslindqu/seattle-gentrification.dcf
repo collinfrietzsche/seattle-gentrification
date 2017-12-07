@@ -1,0 +1,12 @@
+name: seattle-gentrification
+title: seattle-gentrification
+username:
+account: kslindqu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 245989
+bundleId: 1121869
+url: https://kslindqu.shinyapps.io/seattle-gentrification/
+when: 1512679975.28603
+asMultiple: FALSE
+asStatic: FALSE
