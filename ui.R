@@ -21,8 +21,8 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                             img(src='seattle.jpg', align = "center"),
                             tags$h3("Overview of Project", class = "header"),
                             tags$h4("Purpose: We wanted to look at how the housing prices in greater Seattle have changed over time.",
-                                    tags$br(),"Methods: We used Seattle's Open Data website to look at median housing prices in Seattle and its surrounding neighborhoods. We also looked at other factors in these neighborhoods such as the amount of police activity and the quantity of various public facilities.",
-                                    tags$br(),"Claim: We believe that housing prices have increased over time due to various factors.",
+                                    tags$br(),tags$br(),"Methods: We used Seattle's Open Data website to look at median housing prices in Seattle and its surrounding neighborhoods. We also looked at other factors in these neighborhoods such as the amount of police activity and the quantity of various public facilities.",
+                                    tags$br(),tags$br(),"Claim: We believe that housing prices have increased over time due to various factors.",
                                     tags$br(),tags$br(),
                                     "Interpretation of Results:
                                     
@@ -91,7 +91,6 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                             titlePanel("Address Statistics")
                    ),
                    
-                   #PUT TABLE HERE KYLE
                    tabPanel('General Table of Information',
                             titlePanel("Table of City Features"),
                             tags$h3("Select the areas of interest and see how they differ in 
