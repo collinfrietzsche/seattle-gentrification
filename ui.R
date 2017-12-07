@@ -28,11 +28,16 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                                     There is a positive, linear trend between housing prices and time, in general.",tags$br(),
                                     "We were expecting a stronger correlation between housing price and police activity but there isn't too strong of a negative trend.",tags$br(),
                                     "The areas with the most police activity are mainly Downtown, Capitol Hill and University District.",tags$br(),
-                                    "The number of bike racks and public garages/parking lots are highest in areas where the most people are visiting where as the number of food banks and tennis courts are more spread all over the place.", class = "para 1"),
+                                    "The number of bike racks and public garages/parking lots are highest in areas where the most people are visiting where as the number of food banks and tennis courts are more spread all over the place.", class = "para 1")
                             
+                            
+
+                   ),
+                   # Housing Prices Scatter Plot Page
+                   tabPanel('Housing Prices',
+                            titlePanel("Price vs. Year"),
                             
                             # Scatter Plot
-                            tags$h3("Price vs. Year", class = "header"),
                             tags$h5("In the following graph, you can select the specific neighborhood in 
                                     a specific time range that you are interested in. You can clearly see the
                                     how are the housing prices in these areas moving within the time range you selected.", class = "para 1"),
@@ -57,7 +62,6 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                                     increasing significantly. The growth rate is almost 16% over the
                                     course of eight months!", class = "para 1")
                    ),
-                   
                    # Police Incident Page
                    tabPanel('Police Incidents',
                             titlePanel("Police Incidents"),
@@ -65,18 +69,18 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                               tags$h3("About the Map:", class  = "header"),
                               tags$h5("The map below uses colors to display the number of incidents in each
                                       neighborhood in Seattle. The colors are associated with the values shown in
-                                      the ledgend. To view a particular neighborhood, simply hover over with your mouse.
-                                      As you can see, Univesity District is dark red, which is particularly interesting 
+                                      the legend. To view a particular neighborhood, simply hover over with your mouse.
+                                      As you can see, University District is dark red, which is particularly interesting 
                                       being students at the University of Washington."),
                                htmlOutput("police.density"),
-                              tags$h3("About the Scatterplot", class = "header"),
-                              tags$h5("The scatterplot below shows the relationship between housing prices and 
+                              tags$h3("About the Scatter plot", class = "header"),
+                              tags$h5("The scatter plot below shows the relationship between housing prices and 
                                       police incidents. We expected the number of police incidents to cause a 
                                       decrease in housing prices, however as you can see based on the trend shown in
-                                      the scatterplot, that is not the case. We can assume that location is more 
+                                      the scatter plot, that is not the case. We can assume that location is more 
                                       important than police activity when determining price in the Seattle area. To 
                                       get more information on the data, simply hover over the points displayed on the 
-                                      scatterplot to median housing price and number of police incidents for the given neighborhood."),
+                                      scatter plot to median housing price and number of police incidents for the given neighborhood."),
                               plotlyOutput("police.scatter")
                             )
                             )
