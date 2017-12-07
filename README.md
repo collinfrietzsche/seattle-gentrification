@@ -22,7 +22,7 @@ Our main audience for this project is people looking to move in the Seattle area
 ## Technical Description
 __Format of Project:__ Shiny.io 
 __Format of Data Read in:__ .csv files
-__Major Libraries Used:__ Plotly, dplyr, ggplot2, knitr, shiny, shinythemes    
+__Major Libraries Used:__ Plotly, dplyr, ggplot2, knitr, shiny, shinythemes, leaflet, rgdal, rgeos, ggmap
 
 #### Data Wrangling Needed
 Most of the data wrangling for this project will be to clean up bad data entries, join tables on geolocation, and group by regions (municipalities).
