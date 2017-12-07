@@ -10,7 +10,7 @@ source("./data_wrangle.R")
 # Make the map, x - years, y - price
 shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                   
-                   title = 'Exploring Gentrification in Seattle',
+                   title = 'Exploring Housing Prices in Seattle',
                    
                    # Home Page
                    tabPanel('Home Page',
@@ -23,7 +23,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                             tags$h3("Questions", class = "header"),
                             
                             # Scatter Plot
-                            tags$h3("Price vs Time", class = "header"),
+                            tags$h3("Price vs Year", class = "header"),
                             # Create sidebar layout
                             sidebarLayout(
                               # Side Bars
