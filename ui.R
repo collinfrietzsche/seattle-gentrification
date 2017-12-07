@@ -21,7 +21,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                             tags$h3("Overview of Project", class = "header"),
                             tags$h4("Purpose: We wanted to look at how the housing prices in greater Seattle have changed over time.",
                                     tags$br(),"Methods: We used Seattle's Open Data website to look at median housing prices in Seattle and its surrounding neighborhoods. We also looked at other factors in these neighborhoods such as the amount of police activity and the quantity of various public facilities.",
-                                    tags$br(),"Claim: We believe that housing prices have increased over time due to various factors. (not sure what else to add here)",
+                                    tags$br(),"Claim: We believe that housing prices have increased over time due to various factors.",
                                     tags$br(),tags$br(),
                                     "Interpretation of Results:
                                     
@@ -29,7 +29,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                                     "We were expecting a stronger correlation between housing price and police activity but there isn't too strong of a negative trend.",tags$br(),
                                     "The areas with the most police activity are mainly Downtown, Capitol Hill and University District.",tags$br(),
                                     "The number of bike racks and public garages/parking lots are highest in areas where the most people are visiting where as the number of food banks and tennis courts are more spread all over the place.", class = "para 1"),
-                            tags$h3("Questions", class = "header"),
+                            
                             
                             # Scatter Plot
                             tags$h3("Price vs. Year", class = "header"),
@@ -88,8 +88,9 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                    
                    #PUT TABLE HERE KYLE
                    tabPanel('General Table of Information',
-                            titlePanel("This table provides the number of city features in 
-                                       each neighborhood as described by the column names"),
+                            titlePanel("Table of City Features"),
+                            tags$h3("Select the areas of interest and see how they differ in 
+                                       neighborhoods across Seattle"),
                             checkboxGroupInput("all.table", "Choose Columns:",
                                                 choiceNames = colnames(all.summary.data),
                                                 choiceValues = colnames(all.summary.data),
