@@ -43,7 +43,7 @@ shinyServer(function(input, output) {
       select(range)
     
     # make the values into list
-    values <- list()
+    values <- c()
     for(i in 1:length(range.data)) {
       values[i] <- range.data[1, i]
     }
@@ -54,8 +54,7 @@ shinyServer(function(input, output) {
                    hoverinfo = 'text',
                    text = ~paste0("Price: ", values, " unit<br />",
                                   "Years.Month: ", range)) %>%
-             add_trace(x = range, y = values, type = "scatter", 
-                       mode = "line", name = "", line = list(width = 2)) %>%
+             add_lines(x = range, y = values, name = "Trend") %>%
              layout(title = paste0(input$neighborhood, " Neighborhood"),
                     xaxis = list(title = "Time"),
                     yaxis = list(title = "Price ($)"),
