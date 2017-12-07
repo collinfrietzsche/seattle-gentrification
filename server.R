@@ -52,7 +52,7 @@ shinyServer(function(input, output) {
     return(plot_ly(data = price.time.df, x= range, y= values,
                    xlab = range, ylab = values,
                    type = 'scatter', mode = 'markers', #color = ~type
-                   hoverinfo = 'text',
+                   hoverinfo = 'text', name = "Data Points",
                    text = ~paste0("Price: ", values, " unit<br />",
                                   "Years.Month: ", range)) %>%
              add_lines(x = range, y = values, name = "Trend") %>%

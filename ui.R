@@ -3,7 +3,7 @@ library(plotly)
 library(plyr)
 library(shinythemes)
 library(leafletR)
-install.packages("leaflet")
+#install.packages("leaflet")
 
 source("./data_wrangle.R")
 
@@ -20,13 +20,10 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                             ),
                             tags$h3("Overview of Project", class = "header"),
                             tags$h4("Here is where you can put overview information", class = "para 1"),
-                            tags$h3("Questions", class = "header")
+                            tags$h3("Questions", class = "header"),
                             
-                   ),
-                   #move this to home page
-                   # Scatter Plot
-                   tabPanel('Scatter',
-                            titlePanel("Price vs Time"),
+                            # Scatter Plot
+                            tags$h3("Price vs Time", class = "header"),
                             # Create sidebar layout
                             sidebarLayout(
                               # Side Bars
@@ -41,7 +38,8 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                                 plotlyOutput('scatter')
                               )
                             )
-                          ),
+                            
+                   ),
                    
                    # Police Incident Page
                    tabPanel('Police Incidents',
