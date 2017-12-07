@@ -34,7 +34,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("flatly"),
                                 selectInput('neighborhood', label = 'Select Neighborhood:', 
                                             choices = price.time.names),
                                 sliderInput("time", "Time range:", min = 2010.01, max = 2017.09,
-                                            value = c(2010.05, 2016.1), step = 0.01, sep = "")  ##### change the step = ?
+                                            value = c(2017.01, 2017.09), step = 0.01, sep = "")  ##### change the step = ?
                               ),  
                               # Main panel display plotly map
                               mainPanel(
