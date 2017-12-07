@@ -35,7 +35,7 @@ shinyUI(navbarPage(theme = shinythemes::shinytheme("cerulean"),
                    ),
                    # Housing Prices Scatter Plot Page
                    tabPanel('Housing Prices',
-                            titlePanel("Price vs. Year"),
+                            titlePanel("Price vs. Time"),
                             
                             # Scatter Plot
                             tags$h5("In the following graph, you can select the specific neighborhood in 
